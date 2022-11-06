@@ -20,7 +20,7 @@
             It also enables subscriptions and automatically downloads new episodes.
         </p>
         <p>
-            Viewing videos requires the <a href="https://flathub.org/apps/details/org.videolan.VLC">VLC</a> flatpak.
+            Viewing videos requires the "org.videolan.VLC" flatpak.
         </p>
     </description>
     <screenshots>
