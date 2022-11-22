@@ -12,6 +12,12 @@
     <url type="help">https://mediathekview.de/anleitung/</url>
     <url type="vcs-browser">https://github.com/mediathekview/MediathekView</url>
     <url type="donation">https://mediathekview.de/spenden/</url>
+    <categories>
+      <category>AudioVideo</category>
+      <category>Video</category>
+      <category>Player</category>
+      <category>Recorder</category>
+    </categories>
     <description>
         <p>
             MediathekView searches the online media libraries of German public broadcasting stations
