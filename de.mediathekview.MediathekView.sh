@@ -8,4 +8,5 @@ exec java \
     -XX:+UseShenandoahGC -XX:ShenandoahGCHeuristics=compact -XX:MaxRAMPercentage=50.0 -XX:+UseStringDeduplication \
     --add-opens java.desktop/sun.awt.X11=ALL-UNNAMED \
     -DexternalUpdateCheck \
-    -jar /app/share/de.mediathekview.MediathekView/MediathekView.jar "$@"
+    -jar /app/share/de.mediathekview.MediathekView/MediathekView.jar \
+    "${XDG_CONFIG_HOME}/mediathek3"
