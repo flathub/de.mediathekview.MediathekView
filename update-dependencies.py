@@ -29,6 +29,7 @@ RepoURL = namedtuple('RepoURL', 'url relpath base')
 REPO_BASES = [
     'https://repo.maven.apache.org/maven2/',
     'https://oss.sonatype.org/content/repositories/snapshots/',
+    'https://maven.ej-technologies.com/repository/',
 ]
 
 
