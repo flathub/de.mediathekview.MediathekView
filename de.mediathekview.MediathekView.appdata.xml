@@ -48,14 +48,15 @@
         which
         we tag with the correct language, but flathub requires us to provide a default screenshot too -->
         <screenshot type="default">
-            <image>https://mediathekview.de/images/slider/ersterstart.png</image>
-            <image xml:lang="de">https://mediathekview.de/images/slider/ersterstart.png</image>
+            <image>https://mediathekview.de/images/screenshots/filme_uebersicht-standardansicht.png</image>
+            <image xml:lang="de">
+                https://mediathekview.de/images/screenshots/filme_uebersicht-standardansicht.png</image>
             <caption>The movie list upon first launch</caption>
             <caption xml:lang="de">Liste der Filme beim ersten Start</caption>
         </screenshot>
         <screenshot>
-            <image>https://mediathekview.de/images/slider/downloads.png</image>
-            <image xml:lang="de">https://mediathekview.de/images/slider/downloads.png</image>
+            <image>https://mediathekview.de/images/screenshots/download_uebersicht.png</image>
+            <image xml:lang="de">https://mediathekview.de/images/screenshots/download_uebersicht.png</image>
             <caption>The download view</caption>
             <caption xml:lang="de">Die Download-Ansicht</caption>
         </screenshot>
