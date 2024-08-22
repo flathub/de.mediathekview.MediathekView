@@ -4,6 +4,7 @@
     <launchable type="desktop-id">de.mediathekview.MediathekView.desktop</launchable>
     <name>MediathekView</name>
     <summary>Access public German TV Mediatheken</summary>
+    <summary xml:lang="de">Zugriff auf Mediatheken</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0</project_license>
     <developer_name>MediathekView developers</developer_name>
@@ -26,18 +27,32 @@
             downloading videos.
             It also enables subscriptions and automatically downloads new episodes.
         </p>
+        <p xml:lang="de">
+            MediathekView durchsucht die Mediatheken der deutschsprachigen öffentlich-rechtlichen
+            Fernsehsender (ARD, ZDF, Arte, 3Sat, SWR, BR, MDR, NDR, WDR, HR, RBB, ORF, SRF) und
+            zeigt verfügbare Serien und Filme an.
+            Die Liste der Filme kann nach bestimmten Sendern, etc. durchsucht werden. Videos können
+            direkt angesehen oder heruntergeladen werden.
+            Mediathekview unterstützt ebenfalls Abonnements von Serien und kann neue Folgen
+            automatisch herunterladen.
+        </p>
         <p>
             Viewing videos requires the "org.videolan.VLC" flatpak.
+        </p>
+        <p xml:lang="de">
+            Zum Anschauen von Videos muss "org.videolan.VLC" installiert sein.
         </p>
     </description>
     <screenshots>
         <screenshot type="default">
             <image xml:lang="de">https://mediathekview.de/images/slider/ersterstart.png</image>
             <caption>The movie list upon first launch</caption>
+            <caption xml:lang="de">Liste der Filme beim ersten Start</caption>
         </screenshot>
         <screenshot>
             <image xml:lang="de">https://mediathekview.de/images/slider/downloads.png</image>
             <caption>The download view</caption>
+            <caption xml:lang="de">Die Download-Ansicht</caption>
         </screenshot>
     </screenshots>
     <update_contact>sebastian@swsnr.de</update_contact>
