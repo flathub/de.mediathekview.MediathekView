@@ -32,7 +32,12 @@
     </description>
     <screenshots>
         <screenshot type="default">
-            <image>https://mediathekview.de/images/screenshots/screenshot1.png</image>
+            <image xml:lang="de">https://mediathekview.de/images/slider/ersterstart.png</image>
+            <caption>The movie list upon first launch</caption>
+        </screenshot>
+        <screenshot>
+            <image xml:lang="de">https://mediathekview.de/images/slider/downloads.png</image>
+            <caption>The download view</caption>
         </screenshot>
     </screenshots>
     <update_contact>sebastian@swsnr.de</update_contact>
