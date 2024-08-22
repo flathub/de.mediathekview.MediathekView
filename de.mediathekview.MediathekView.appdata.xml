@@ -44,12 +44,17 @@
         </p>
     </description>
     <screenshots>
+        <!-- We duplicate screenshots here: Mediathekview only provides German-language screenshots,
+        which
+        we tag with the correct language, but flathub requires us to provide a default screenshot too -->
         <screenshot type="default">
+            <image>https://mediathekview.de/images/slider/ersterstart.png</image>
             <image xml:lang="de">https://mediathekview.de/images/slider/ersterstart.png</image>
             <caption>The movie list upon first launch</caption>
             <caption xml:lang="de">Liste der Filme beim ersten Start</caption>
         </screenshot>
         <screenshot>
+            <image>https://mediathekview.de/images/slider/downloads.png</image>
             <image xml:lang="de">https://mediathekview.de/images/slider/downloads.png</image>
             <caption>The download view</caption>
             <caption xml:lang="de">Die Download-Ansicht</caption>
