@@ -68,8 +68,8 @@ modules:
       - 'install -Dm644 res/MediathekView.svg "${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/de.mediathekview.MediathekView.svg"'
     sources:
       - type: archive
-        url: "https://github.com/mediathekview/MediathekView/archive/refs/tags/14.0.0.tar.gz"
-        sha512: "e97844b4a06dbe42603d55854528b446638a4c0b830f824e7092c19ec2a7d308378f05887d2d0636ded48ec51354b8b2084448bf55778a7d5e31f1d145e030f2"
+        url: "https://github.com/mediathekview/MediathekView/archive/refs/tags/14.1.0.tar.gz"
+        sha512: "0498c3d6d0ec671fa2efcdc9ef91be97dcc9a4776ceb398668d70808f10c7065e2597ed72b950422e3f45d976cfb575281d8e9b8074a0dfb38917b340b0556b2"
       - maven-dependencies.json
       # Set default VLC path to the launcher script we install in the next step
       - type: patch
