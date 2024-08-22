@@ -54,7 +54,7 @@ modules:
     build-options:
       env:
         PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk/bin
-        JAVA_HOME: /usr/lib/sdk/openjdk/jvm/openjdk-20
+        JAVA_HOME: /usr/lib/sdk/openjdk/jvm/openjdk-22
     build-commands:
       # The build process mostly follows Arch's PKGBUILD for MediathekView:
       # https://github.com/archlinux/svntogit-community/blob/packages/mediathekview/trunk/PKGBUILD
