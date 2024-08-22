@@ -3,7 +3,7 @@
     <id>de.mediathekview.MediathekView</id>
     <launchable type="desktop-id">de.mediathekview.MediathekView.desktop</launchable>
     <name>MediathekView</name>
-    <summary>Access to public German TV Mediathek</summary>
+    <summary>Access public German TV Mediatheken</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0</project_license>
     <developer_name>MediathekView developers</developer_name>
