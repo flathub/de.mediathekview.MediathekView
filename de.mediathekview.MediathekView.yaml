@@ -26,9 +26,6 @@ finish-args:
   - "--talk-name=org.freedesktop.Flatpak" # to launch the VLC flatpak
   # See https://github.com/flathub/org.freedesktop.Sdk.Extension.openjdk#usage
   - "--env=PATH=/app/bin/:/app/jre/bin:/usr/bin"
-cleanup-commands:
-  # Some cargo-culting for ffmpeg; copied this from elsewhere
-  - "mkdir -p /app/lib/ffmpeg"
 modules:
   # See https://github.com/flathub/org.freedesktop.Sdk.Extension.openjdk#usage
   - name: openjdk
