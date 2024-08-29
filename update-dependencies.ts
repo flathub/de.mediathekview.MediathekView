@@ -39,7 +39,14 @@ interface UrlSource {
     readonly "dest-filename"?: string;
 }
 
-type Source = FileSource | UrlSource;
+interface GitSource {
+    readonly type: "git";
+    readonly url: string;
+    readonly tag: string;
+    readonly commit: string;
+}
+
+type Source = FileSource | UrlSource | GitSource;
 
 /**
  * Run a command and return its output.
@@ -65,13 +72,13 @@ const checkedRun = async (
 };
 
 /**
- * Determine whether the given flatpak module source refers to an URL.
+ * Determine whether the given flatpak module source refers to Git.
  *
- * @param source The source to cjecl
- * @returns Whether `source` refers to a URL or not
+ * @param source The source
+ * @returns Whether `source` is a git source
  */
-const isUrlSource = (source: string | Source): source is UrlSource =>
-    typeof source !== "string" && Object.hasOwn(source, "url");
+const isGitSource = (source: string | Source): source is GitSource =>
+    typeof source !== "string" && source.type === "git";
 
 interface Module {
     readonly name: string;
@@ -91,7 +98,7 @@ interface Manifest {
  * @param manifestDirectory The directory containing the manifest
  * @returns The main source
  */
-const getMainSource = async (manifestDirectory: string): Promise<UrlSource> => {
+const getMainSource = async (manifestDirectory: string): Promise<GitSource> => {
     const manifestPath = path.join(
         manifestDirectory,
         "de.mediathekview.MediathekView.yaml",
@@ -103,24 +110,12 @@ const getMainSource = async (manifestDirectory: string): Promise<UrlSource> => {
         throw new Error("Failed to find mediathekview module");
     }
     const source = module.sources
-        .filter(isUrlSource)
-        .find((source) =>
-            source.type === "archive" &&
-            source.url.startsWith(
-                "https://github.com/mediathekview/MediathekView/",
-            )
-        );
+        .filter(isGitSource)
+        .find((source) => source.url.includes("mediathekview"));
     if (!source) {
         throw new Error("No archive source found for MediathekView");
     }
     return source;
-};
-
-/**
- * Download `url` to `targetFile`, using `curl`.
- */
-const curl = async (url: string, targetFile: string): Promise<void> => {
-    await checkedRun(["/usr/bin/curl", "-sSL", "-o", targetFile, url]);
 };
 
 /**
@@ -135,28 +130,6 @@ const sha512sum = async (file: string): Promise<string> => {
     return Array.from(new Uint8Array(digest))
         .map((b) => b.toString(16).padStart(2, "0"))
         .join("");
-};
-
-/**
- * Untar `tarfile` to `targetDirectory` directly, with no further sub directories.
- *
- * Runs `bsdtar`, with `--strip-components=1`.
- *
- * @param targetDirectory The directory to extract the tarfile to.
- * @param tarfile The tarfile to extract.
- */
-const untarTo = async (
-    targetDirectory: string,
-    tarfile: string,
-): Promise<void> => {
-    await checkedRun([
-        "/usr/bin/bsdtar",
-        "xf",
-        tarfile,
-        "-C",
-        targetDirectory,
-        "--strip-components=1",
-    ]);
 };
 
 interface ArtifactURL {
@@ -287,24 +260,20 @@ const main = () =>
         }
 
         const source = await getMainSource(manifestDirectory);
-        const targetFile = path.join(
-            workingDirectory,
-            source.url.split("/").at(-1)!,
-        );
-        await curl(source.url, targetFile);
-        if (source.sha512 !== await sha512sum(targetFile)) {
-            throw new Error(`Checksum verification of ${source.url} failed!`);
-        }
-
-        const sourceDirectory = path.join(workingDirectory, "mediathekview");
         const repoDirectory = path.join(workingDirectory, "repo");
+        const sourceDirectory = path.join(workingDirectory, "mediathekview");
         await Promise
             .all([sourceDirectory, repoDirectory].map((d) => Deno.mkdir(d)));
-
-        await untarTo(sourceDirectory, targetFile);
-        // Asynchronously delete the tarfile to free memory in tmpdir
-        Deno.remove(targetFile).catch((error) => {
-            console.error("Failed to delete", targetFile, error);
+        await checkedRun(["git", "init"], { cwd: sourceDirectory });
+        await checkedRun([
+            "git",
+            "fetch",
+            "--depth=1",
+            source.url,
+            source.commit,
+        ], { cwd: sourceDirectory });
+        await checkedRun(["git", "reset", "--hard", source.commit], {
+            cwd: sourceDirectory,
         });
 
         // TODO: Do we need to run a full "install"?
