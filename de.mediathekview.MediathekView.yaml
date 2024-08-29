@@ -83,6 +83,9 @@ modules:
         url: "https://github.com/mediathekview/MediathekView.git"
         tag: "14.1.0"
         commit: "29cbae1944c00171a5b1b80b4aaf79eee725c8a8"
+        x-checker-data:
+          type: git
+          tag-pattern: ^\d[\d.]+$
       - maven-dependencies.json
       # Set default VLC path to the launcher script we install in the next step
       - type: patch
