@@ -9,6 +9,7 @@ add-extensions:
     directory: "lib/ffmpeg"
     version: "23.08"
     add-ld-path: "."
+    autodownload: true
 command: de.mediathekview.MediathekView
 finish-args:
   - "--share=network" # We need the network to download films
@@ -49,6 +50,10 @@ modules:
       - type: archive
         url: https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz
         sha256: ee8f3ef946156ad3406fdf45feedbdcd932dbd211ab4f16f75eba4f36fb2f6c0
+        x-checker-data:
+          project-id: 13149
+          type: anitya
+          url-template: https://download.gnome.org/sources/libnotify/$major.$minor/libnotify-$version.tar.xz
   # Mediathekview itself
   - name: mediathekview
     buildsystem: simple
@@ -74,9 +79,13 @@ modules:
       # VLC launcher script
       - 'install -Dm755 "open-vlc.sh" "${FLATPAK_DEST}/bin/vlc"'
     sources:
-      - type: archive
-        url: "https://github.com/mediathekview/MediathekView/archive/refs/tags/14.1.0.tar.gz"
-        sha512: "0498c3d6d0ec671fa2efcdc9ef91be97dcc9a4776ceb398668d70808f10c7065e2597ed72b950422e3f45d976cfb575281d8e9b8074a0dfb38917b340b0556b2"
+      - type: git
+        url: "https://github.com/mediathekview/MediathekView.git"
+        tag: "14.1.0"
+        commit: "29cbae1944c00171a5b1b80b4aaf79eee725c8a8"
+        x-checker-data:
+          type: git
+          tag-pattern: ^\d[\d.]+$
       - maven-dependencies.json
       # Set default VLC path to the launcher script we install in the next step
       - type: patch
