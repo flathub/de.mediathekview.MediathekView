@@ -1,41 +1,41 @@
 app-id: de.mediathekview.MediathekView
 runtime: org.freedesktop.Platform
-runtime-version: "24.08"
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk
 add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
-    directory: "lib/ffmpeg"
-    version: "24.08"
-    add-ld-path: "."
+    directory: lib/ffmpeg
+    version: '24.08'
+    add-ld-path: .
     autodownload: true
 command: de.mediathekview.MediathekView
 finish-args:
-  - "--share=network" # We need the network to download films
-  - "--socket=x11" # Show windows (Java doesn't support wayland yet)
-  - "--share=ipc" # Required for X11
-  - "--device=dri" # Render things with opengl
-  - "--socket=pulseaudio" # Sound
+  - --share=network   # We need the network to download films
+  - --socket=x11   # Show windows (Java doesn't support wayland yet)
+  - --share=ipc   # Required for X11
+  - --device=dri   # Render things with opengl
+  - --socket=pulseaudio   # Sound
   # Expose all of $HOME because being a Java app mediathekview doesn't use
   # portals and lets users use arbitrary download directories.  Restricting file
   # system access further would be confusing because the home directory would
   # look different in the Java directory chooser, and users would likely miss
   # downloaded files. See https://github.com/flathub/de.mediathekview.MediathekView/issues/7
-  - "--filesystem=home"
-  - "--talk-name=org.freedesktop.Notifications" # For desktop notifications
-  - "--talk-name=org.freedesktop.Flatpak" # to launch the VLC flatpak
+  - --filesystem=home
+  - --talk-name=org.freedesktop.Notifications   # For desktop notifications
+  - --talk-name=org.freedesktop.Flatpak   # to launch the VLC flatpak
   # See https://github.com/flathub/org.freedesktop.Sdk.Extension.openjdk#usage
-  - "--env=PATH=/app/bin/:/app/jre/bin:/usr/bin"
+  - --env=PATH=/app/bin/:/app/jre/bin:/usr/bin
 cleanup-commands:
   # Create ffmpeg libdir so that ldconfig doesn't fail when the flatpak starts.
   # See https://github.com/flathub/de.mediathekview.MediathekView/issues/14
-  - "mkdir -p /app/lib/ffmpeg"
+  - mkdir -p /app/lib/ffmpeg
 modules:
   # See https://github.com/flathub/org.freedesktop.Sdk.Extension.openjdk#usage
   - name: openjdk
     buildsystem: simple
-    build-commands: ["/usr/lib/sdk/openjdk/install.sh"]
+    build-commands: [/usr/lib/sdk/openjdk/install.sh]
   # Libnotify for desktop notifications; we build it separately to avoid depending
   # on the entire Gnome runtime.
   - name: libnotify
@@ -59,30 +59,29 @@ modules:
     buildsystem: simple
     build-options:
       env:
-        PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk/bin
-        JAVA_HOME: /usr/lib/sdk/openjdk/jvm/openjdk-22
+        PATH: /usr/lib/sdk/openjdk/bin:/app/bin:/usr/bin
     build-commands:
       # The build process mostly follows Arch's PKGBUILD for MediathekView:
       # https://github.com/archlinux/svntogit-community/blob/packages/mediathekview/trunk/PKGBUILD
-      - "mvn -Dmaven.repo.local=.m2/repository/ -Dmaven.test.skip=true clean install"
-      - 'install -Dm644 -t "${FLATPAK_DEST}/share/de.mediathekview.MediathekView" target/MediathekView.jar'
+      - mvn -Dmaven.repo.local=.m2/repository/ -Dmaven.test.skip=true clean install
+      - install -Dm644 -t "${FLATPAK_DEST}/share/de.mediathekview.MediathekView" target/MediathekView.jar
       # Icons from the source directory
-      - 'install -Dm644 target/MediathekView@x16.png "${FLATPAK_DEST}/share/icons/hicolor/16x16/apps/de.mediathekview.MediathekView.png"'
-      - 'install -Dm644 target/MediathekView@x32.png "${FLATPAK_DEST}/share/icons/hicolor/32x32/apps/de.mediathekview.MediathekView.png"'
-      - 'install -Dm644 target/MediathekView@x48.png "${FLATPAK_DEST}/share/icons/hicolor/48x48/apps/de.mediathekview.MediathekView.png"'
-      - 'install -Dm644 target/MediathekView@x128.png "${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/de.mediathekview.MediathekView.png"'
-      - 'install -Dm644 res/MediathekView.svg "${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/de.mediathekview.MediathekView.svg"'
+      - install -Dm644 target/MediathekView@x16.png "${FLATPAK_DEST}/share/icons/hicolor/16x16/apps/de.mediathekview.MediathekView.png"
+      - install -Dm644 target/MediathekView@x32.png "${FLATPAK_DEST}/share/icons/hicolor/32x32/apps/de.mediathekview.MediathekView.png"
+      - install -Dm644 target/MediathekView@x48.png "${FLATPAK_DEST}/share/icons/hicolor/48x48/apps/de.mediathekview.MediathekView.png"
+      - install -Dm644 target/MediathekView@x128.png "${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/de.mediathekview.MediathekView.png"
+      - install -Dm644 res/MediathekView.svg "${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/de.mediathekview.MediathekView.svg"
       # Metadata and desktop integration
-      - 'install -Dm755 de.mediathekview.MediathekView.sh "${FLATPAK_DEST}/bin/de.mediathekview.MediathekView"'
-      - 'install -Dm644 -t "${FLATPAK_DEST}/share/applications/" de.mediathekview.MediathekView.desktop'
-      - 'install -Dm644 de.mediathekview.MediathekView.appdata.xml "${FLATPAK_DEST}/share/metainfo/de.mediathekview.MediathekView.metainfo.xml"'
+      - install -Dm755 de.mediathekview.MediathekView.sh "${FLATPAK_DEST}/bin/de.mediathekview.MediathekView"
+      - install -Dm644 -t "${FLATPAK_DEST}/share/applications/" de.mediathekview.MediathekView.desktop
+      - install -Dm644 de.mediathekview.MediathekView.appdata.xml "${FLATPAK_DEST}/share/metainfo/de.mediathekview.MediathekView.metainfo.xml"
       # VLC launcher script
-      - 'install -Dm755 "open-vlc.sh" "${FLATPAK_DEST}/bin/vlc"'
+      - install -Dm755 "open-vlc.sh" "${FLATPAK_DEST}/bin/vlc"
     sources:
       - type: git
-        url: "https://github.com/mediathekview/MediathekView.git"
-        tag: "14.1.0"
-        commit: "29cbae1944c00171a5b1b80b4aaf79eee725c8a8"
+        url: https://github.com/mediathekview/MediathekView.git
+        tag: 14.1.0
+        commit: 29cbae1944c00171a5b1b80b4aaf79eee725c8a8
         x-checker-data:
           type: git
           tag-pattern: ^\d[\d.]+$
