@@ -63,6 +63,9 @@
     </screenshots>
     <update_contact>sebastian@swsnr.de</update_contact>
     <releases>
+        <release version="14.2.0" date="2025-02-28">
+            <url>https://mediathekview.de/changelog/14-2-0/</url>
+        </release>
         <release version="14.1.0" date="2024-08-21">
             <url>https://mediathekview.de/changelog/14-1-0/</url>
         </release>
