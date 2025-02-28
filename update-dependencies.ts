@@ -66,6 +66,10 @@ const checkedRun = async (
         ...options,
     }).output();
     if (output.code !== 0) {
+        // If the command failed, dump its output for easier debugging.
+        const decoder = new TextDecoder();
+        console.info(decoder.decode(output.stdout));
+        console.error(decoder.decode(output.stderr));
         throw new Error(`Failed to run command ${command.join(" ")}`);
     }
     return output;
