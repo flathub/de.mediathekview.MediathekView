@@ -890,17 +890,17 @@
   },
   {
     "type": "file",
-    "url": "https://repo.maven.apache.org/maven2/es/blackleg/jlibnotify/1.1.5/jlibnotify-1.1.5.jar",
-    "dest": ".m2/repository/es/blackleg/jlibnotify/1.1.5",
-    "dest-filename": "jlibnotify-1.1.5.jar",
-    "sha512": "a22ca06181c80552bb67010051682f27211b09c049d49a352361531e0481e8324e9d519d217c487789f82cc8f443bbea303897587326f440973f0b94d7fac65a"
+    "url": "https://repo.maven.apache.org/maven2/es/blackleg/jlibnotify/1.2.1/jlibnotify-1.2.1.jar",
+    "dest": ".m2/repository/es/blackleg/jlibnotify/1.2.1",
+    "dest-filename": "jlibnotify-1.2.1.jar",
+    "sha512": "1ac3928f995d56c50adc63e298a934a6b99e1dedfce3c306ee91ef54f0469cca7028e12ed50a92a8e6d7f1b7da875c7d8677ab7ac48c1cb3ce661bdf32757c44"
   },
   {
     "type": "file",
-    "url": "https://repo.maven.apache.org/maven2/es/blackleg/jlibnotify/1.1.5/jlibnotify-1.1.5.pom",
-    "dest": ".m2/repository/es/blackleg/jlibnotify/1.1.5",
-    "dest-filename": "jlibnotify-1.1.5.pom",
-    "sha512": "0ee91e5fd5c4909fbdff3702d48b3714ebe80b214f9a4add6b78dc617b38095fc01f0528462a557d396cafbf64e186f8a63167b784c0f76a4a0e52a19ea2b169"
+    "url": "https://repo.maven.apache.org/maven2/es/blackleg/jlibnotify/1.2.1/jlibnotify-1.2.1.pom",
+    "dest": ".m2/repository/es/blackleg/jlibnotify/1.2.1",
+    "dest-filename": "jlibnotify-1.2.1.pom",
+    "sha512": "02494c10442ef9306fcc11fc5ba7556d314bd3ead7875e2d78196fbd2ac9bc3031cb65b30e658d734b0b1f09055002063c6f53ad287369b73d209fcbed8b9a59"
   },
   {
     "type": "file",
@@ -1072,13 +1072,6 @@
   },
   {
     "type": "file",
-    "url": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.14.18/byte-buddy-parent-1.14.18.pom",
-    "dest": ".m2/repository/net/bytebuddy/byte-buddy-parent/1.14.18",
-    "dest-filename": "byte-buddy-parent-1.14.18.pom",
-    "sha512": "82eb52fe0639a3c4142f65feef83a723c9c94159d02d5ae122796b84bf8567a23005a2e534f416e2e30bcc61e62835b1496182aecd1ddacfb7f8d49e3194aaab"
-  },
-  {
-    "type": "file",
     "url": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.9.10/byte-buddy-parent-1.9.10.pom",
     "dest": ".m2/repository/net/bytebuddy/byte-buddy-parent/1.9.10",
     "dest-filename": "byte-buddy-parent-1.9.10.pom",
@@ -1086,24 +1079,17 @@
   },
   {
     "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.14.15/byte-buddy-1.14.15.jar",
+    "dest": ".m2/repository/net/bytebuddy/byte-buddy/1.14.15",
+    "dest-filename": "byte-buddy-1.14.15.jar",
+    "sha512": "070dd3ed7d9049f2559164b164e2e597baa632b1ba294ae501ed5082d34845aa7c742c6e2c4c00e7c10d1f982b82690e47bca11312f2e92fc00baa8a4cbe4bf7"
+  },
+  {
+    "type": "file",
     "url": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.14.15/byte-buddy-1.14.15.pom",
     "dest": ".m2/repository/net/bytebuddy/byte-buddy/1.14.15",
     "dest-filename": "byte-buddy-1.14.15.pom",
     "sha512": "8f74759e330ec0f8e76ca66a2f999273140eaa258bf78591dfc36781777ffe3f5a1f7ba24a26b27095e10f6c3dac81f51b057b80868af56a5bea5faed4cdf844"
-  },
-  {
-    "type": "file",
-    "url": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.14.18/byte-buddy-1.14.18.jar",
-    "dest": ".m2/repository/net/bytebuddy/byte-buddy/1.14.18",
-    "dest-filename": "byte-buddy-1.14.18.jar",
-    "sha512": "da050e5f32bc2825f04fe4f3c6c23654779c0d6b0c8126a287f7a03e9a520de55f7f0209609e672aecc75ba76a33fc555a3b485ba2ac82ad2a24c8e3f9eacffd"
-  },
-  {
-    "type": "file",
-    "url": "https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.14.18/byte-buddy-1.14.18.pom",
-    "dest": ".m2/repository/net/bytebuddy/byte-buddy/1.14.18",
-    "dest-filename": "byte-buddy-1.14.18.pom",
-    "sha512": "3b532ac19976d0ecbba623506ad5c428a0f7ac0e959528025ca307363a5196aa78274dd4f36f66ef50bffd064a1d79559cf04ddcd564fabc8db7c6fb3e859e72"
   },
   {
     "type": "file",
@@ -3844,24 +3830,10 @@
   },
   {
     "type": "file",
-    "url": "https://repo.maven.apache.org/maven2/org/assertj/assertj-bom/3.25.3/assertj-bom-3.25.3.pom",
-    "dest": ".m2/repository/org/assertj/assertj-bom/3.25.3",
-    "dest-filename": "assertj-bom-3.25.3.pom",
-    "sha512": "996a580f7ddd83e2a3f1b784efbe6444b88466fa661f55494ddeba902ea9195adf4d42b02c26b84775e6fcdaad32500b63dd8684cfc4ecf6ce66b33e50bb3195"
-  },
-  {
-    "type": "file",
-    "url": "https://repo.maven.apache.org/maven2/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar",
-    "dest": ".m2/repository/org/assertj/assertj-core/3.26.3",
-    "dest-filename": "assertj-core-3.26.3.jar",
-    "sha512": "2cf7310e2079e0b694ad3e948f874faa8c6895b50f9db9e4e4829cef22788f9ab9a4fbd36c14030514e42a5b3d9529933462ace8df7862efc8a19ff1c1372325"
-  },
-  {
-    "type": "file",
-    "url": "https://repo.maven.apache.org/maven2/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.pom",
-    "dest": ".m2/repository/org/assertj/assertj-core/3.26.3",
-    "dest-filename": "assertj-core-3.26.3.pom",
-    "sha512": "a4baa08e71c7d861d288efbcb1176ce825cc5b2a2842dabd514b4a95ca052db50b16ca285bae4ebf77f62619179cbea8061aafbc1bab7dcfd6b270ff8a8c6c4d"
+    "url": "https://repo.maven.apache.org/maven2/org/assertj/assertj-bom/3.27.3/assertj-bom-3.27.3.pom",
+    "dest": ".m2/repository/org/assertj/assertj-bom/3.27.3",
+    "dest-filename": "assertj-bom-3.27.3.pom",
+    "sha512": "d91c2cc1ea791d4d13454ba47fd2bc3b0f0602af4a6df313f58ec6fd50f03530fb195d91c24b4ab68d48f9508eb3527e02605315f9bb157fc2167b1c9e095da3"
   },
   {
     "type": "file",
@@ -5451,6 +5423,13 @@
     "dest": ".m2/repository/org/junit/junit-bom/5.11.4",
     "dest-filename": "junit-bom-5.11.4.pom",
     "sha512": "303612e72adb3af46265aa7c60718dd51baccb576d4a9820ae3aa94c5119d6c9b3a3168993dd1a6692154786cbbd33eba99985842fc45125a18a1c44d490a8c1"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.12.1/junit-bom-5.12.1.pom",
+    "dest": ".m2/repository/org/junit/junit-bom/5.12.1",
+    "dest-filename": "junit-bom-5.12.1.pom",
+    "sha512": "cff3597b10ddcc6f4cf516becd2f6d6069b0025d69a7c3317988b31bdfeca895b4635bfdb62b5ae19a76a3efed5b42339be93c53029e52b25d41855f59ebd7fa"
   },
   {
     "type": "file",

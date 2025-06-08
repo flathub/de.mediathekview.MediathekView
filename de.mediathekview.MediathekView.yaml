@@ -80,8 +80,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/mediathekview/MediathekView.git
-        tag: 14.3.0
-        commit: c4963c7a95413cf9e2368829f252f1eb4826f9ab
+        tag: 14.3.1
+        commit: c7c6549bb967a8cbb8934914efb4785e7654a544
         x-checker-data:
           type: git
           tag-pattern: '^\d[\d.]+$'
