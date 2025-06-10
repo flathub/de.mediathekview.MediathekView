@@ -34,6 +34,7 @@ from dataclasses import dataclass
 from subprocess import CalledProcessError, run
 from tempfile import TemporaryDirectory
 from typing import Any, override
+from argparse import ArgumentParser
 
 
 @dataclass(kw_only=True, frozen=True)
@@ -62,6 +63,32 @@ class FlatpakFileSource:
             "dest-filename": self.dest_filename,
             "sha512": self.sha512,
         }
+
+
+@dataclass(kw_only=True, frozen=True)
+class FlatpakSdk:
+    """A flatpak SDK by name and version"""
+
+    name: str
+    version: str
+
+    @classmethod
+    def parse_from_manifest(cls, manifest: str) -> "FlatpakSdk":
+        name = version = None
+        for line in manifest.splitlines():
+            if line.startswith("sdk:"):
+                name = line.split(":", maxsplit=1)[1].strip()
+            elif line.startswith("runtime-version"):
+                version = line.split(":", maxsplit=1)[1].strip().strip("'\"")
+
+            if name and version:
+                return cls(name=name, version=version)
+
+        raise LookupError("Failed to find sdk or runtime-version in manifest")
+
+    @override
+    def __str__(self):
+        return f"{self.name}//{self.version}"
 
 
 # Known base URLs of Maven repositories used by MediathekView.
@@ -244,20 +271,73 @@ class SourceEncoder(json.JSONEncoder):
         return super().default(o)
 
 
-def main() -> None:
-    if os.geteuid() == 0:
-        sys.exit("Do not run this as root!")
-
-    manifest_directory = Path(__file__).parent
-    manifest = manifest_directory / "de.mediathekview.MediathekView.yaml"
+def run_direct(manifest: Path) -> None:
     source = find_mediathekview_source(manifest)
-    target = manifest_directory / "maven-dependencies.json"
+    target = manifest.parent / "maven-dependencies.json"
+    sources = update_dependencies(source)
+    with target.open("w", encoding="utf-8") as sink:
+        json.dump(sources, sink, indent=2, cls=SourceEncoder)
+
+
+def run_in_flatpak(manifest: Path) -> None:
+    base_sdk = FlatpakSdk.parse_from_manifest(manifest.read_text())
+    sdks = [
+        base_sdk,
+        FlatpakSdk(
+            name="org.freedesktop.Sdk.Extension.openjdk",
+            version=base_sdk.version,
+        ),
+    ]
+    cmd = [
+        "flatpak",
+        "install",
+        "--user",
+        "--noninteractive",
+        "--assumeyes",
+    ]
+    cmd.extend(str(s) for s in sdks)
+    print("Running {}".format(shlex.join(cmd)))
+    _ = run(cmd, check=True)
+
+    manifest_directory = manifest.parent.absolute()
+    cmd = [
+        "flatpak",
+        "run",
+        "--share=network",
+        "--command=/bin/bash",
+        "--filesystem={}".format(manifest_directory.as_posix()),
+        "--cwd={}".format(manifest_directory.as_posix()),
+        str(base_sdk),
+        "-c",
+        "source /usr/lib/sdk/openjdk/enable.sh; {}/update-dependencies.py".format(
+            shlex.quote(manifest_directory.as_posix())
+        ),
+    ]
+    print("Running {}".format(shlex.join(cmd)))
+    _ = run(cmd, check=True)
+
+
+def main() -> None:
     try:
-        sources = update_dependencies(source)
-        with target.open("w", encoding="utf-8") as sink:
-            json.dump(sources, sink, indent=2, cls=SourceEncoder)
+        if os.geteuid() == 0:
+            sys.exit("Do not run this as root!")
+
+        parser = ArgumentParser()
+        _ = parser.add_argument(
+            "--flatpak",
+            action="store_true",
+            help="Run inside flatpak",
+        )
+
+        manifest = Path(__file__).parent / "de.mediathekview.MediathekView.yaml"
+
+        args = parser.parse_args()
+        if args.flatpak:
+            run_in_flatpak(manifest)
+        else:
+            run_direct(manifest)
     except KeyboardInterrupt:
-        sys.exit(f"Interrupted, {target} was not updated")
+        sys.exit("Interrupted, dependencies not updated!")
     except CalledProcessError as error:
         if error.stderr:
             sys.exit(

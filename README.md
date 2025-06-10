@@ -2,11 +2,10 @@
 
 ## Update maven dependencies
 
-`maven-dependencies.json` lists all Maven dependencies explicitly, to enable the
-flatpak builder to download these ahead of time and reconstruct the complete
-local Maven repository required for Mediathekview, for the subsequent offline
-build.
+Run `./update-dependencies.py --flatpak` to update `maven-dependencies.json`.
+This spawns a flatpak sandbox to download and build the MediathekView release
+referenced in the main manifest, and then extracts all dependency URLs from the
+build log.
 
-To update the dependencies run `./update-dependencies.py` with Python 3.
-The script needs OpenJDK and git to download and build the MediathekView release
-from the main manifest and extract all dependency URLs from the build log.
+To run the script directly you need Git, OpenJDK, and a reasonably recent
+Python 3.
