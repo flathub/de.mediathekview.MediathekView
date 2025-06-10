@@ -7,11 +7,6 @@ flatpak builder to download these ahead of time and reconstruct the complete
 local Maven repository required for Mediathekview, for the subsequent offline
 build.
 
-Install OpenJDK >= 22, `bsdtar`, `curl`, and [deno](https://deno.com/). Then
-update the Mediathekview source in the manifest, and run
-`./update-dependencies.ts` with deno.
-
-The script downloads Mediathekview, verifies its checksum, runs a complete build
-of Mediathekview against a fresh local repository, extracts all downloaded
-artifacts from the build logs, and writes a complete list to
-`maven-dependencies.json`.
+To update the dependencies run `./update-dependencies.py` with Python 3.
+The script needs OpenJDK and git to download and build the MediathekView release
+from the main manifest and extract all dependency URLs from the build log.
