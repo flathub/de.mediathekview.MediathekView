@@ -84,7 +84,7 @@ modules:
         commit: c7c6549bb967a8cbb8934914efb4785e7654a544
         x-checker-data:
           type: git
-          tag-pattern: '^\d[\d.]+$'
+          tag-pattern: "^[\\d.]+$"
       - maven-dependencies.json
       # Set default VLC path to the launcher script we install in the next step
       - type: patch
