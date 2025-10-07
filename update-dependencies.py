@@ -222,12 +222,30 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
             "advice.detachedHead=false",
             "clone",
             "--depth=1",
-            f"--revision={source.commit}",
             source.url,
             str(source_directory),
         ]
         print("Running {}".format(shlex.join(cmd)))
         _ = run(cmd, check=True)
+
+        cmd_fetch = [
+            "git",
+            "fetch",
+            "--depth=1",
+            "origin",
+            source.commit,
+        ]
+        print("Running {}".format(shlex.join(cmd_fetch)))
+        _ = run(cmd_fetch, cwd=str(source_directory), check=True)
+
+        cmd_checkout = [
+            "git",
+            "switch",
+            "--detach",
+            source.commit,
+        ]
+        print("Running {}".format(shlex.join(cmd_checkout)))
+        _ = run(cmd_checkout, cwd=str(source_directory), check=True)
 
         repo_directory = working_directory / "repo"
         repo_directory.mkdir()
