@@ -1,9 +1,9 @@
 app-id: de.mediathekview.MediathekView
 runtime: org.freedesktop.Platform
-runtime-version: '25.08'
+runtime-version: "25.08"
 sdk: org.freedesktop.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.openjdk
+  - org.freedesktop.Sdk.Extension.openjdk25
 command: de.mediathekview.MediathekView
 finish-args:
   - --share=network # We need the network to download films
@@ -29,7 +29,7 @@ modules:
   # See https://github.com/flathub/org.freedesktop.Sdk.Extension.openjdk#usage
   - name: openjdk
     buildsystem: simple
-    build-commands: [/usr/lib/sdk/openjdk/install.sh]
+    build-commands: [/usr/lib/sdk/openjdk25/install.sh]
   # Libnotify for desktop notifications; we build it separately to avoid depending
   # on the entire Gnome runtime.
   - name: libnotify
@@ -53,7 +53,8 @@ modules:
     buildsystem: simple
     build-options:
       env:
-        PATH: /usr/lib/sdk/openjdk/bin:/app/bin:/usr/bin
+        PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk25/bin
+        JAVA_HOME: /usr/lib/sdk/openjdk25/jvm/openjdk-25
     build-commands:
       - mvn -Dmaven.repo.local=.m2/repository/ -Dmaven.test.skip=true clean package
       # Install the main MediathekView jar file and its dependencies

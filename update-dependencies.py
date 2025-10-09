@@ -272,6 +272,10 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
             check=True,
             capture_output=True,
             encoding="utf-8",
+            env=dict(os.environ) | {
+                'PATH': '/app/bin:/usr/bin:/usr/lib/sdk/openjdk25/bin',
+                'JAVA_HOME': '/usr/lib/sdk/openjdk25/jvm/openjdk-25'
+            }
         )
         sources = [
             create_flatpak_source(repo_directory, url)
@@ -302,7 +306,7 @@ def run_in_flatpak(manifest: Path) -> None:
     sdks = [
         base_sdk,
         FlatpakSdk(
-            name="org.freedesktop.Sdk.Extension.openjdk",
+            name="org.freedesktop.Sdk.Extension.openjdk25",
             version=base_sdk.version,
         ),
     ]
