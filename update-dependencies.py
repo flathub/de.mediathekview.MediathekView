@@ -222,17 +222,37 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
             "advice.detachedHead=false",
             "clone",
             "--depth=1",
-            f"--revision={source.commit}",
             source.url,
             str(source_directory),
         ]
         print("Running {}".format(shlex.join(cmd)))
         _ = run(cmd, check=True)
 
+        cmd_fetch = [
+            "git",
+            "fetch",
+            "--depth=1",
+            "origin",
+            source.commit,
+        ]
+        print("Running {}".format(shlex.join(cmd_fetch)))
+        _ = run(cmd_fetch, cwd=str(source_directory), check=True)
+
+        cmd_checkout = [
+            "git",
+            "switch",
+            "--detach",
+            source.commit,
+        ]
+        print("Running {}".format(shlex.join(cmd_checkout)))
+        _ = run(cmd_checkout, cwd=str(source_directory), check=True)
+
         repo_directory = working_directory / "repo"
         repo_directory.mkdir()
         cmd = [
             str(source_directory / "mvnw"),
+            # Disable kotlin daemon as this is a single fire-and-forget compilation
+            '-Dkotlin.compiler.daemon=false'
             # Enable batch mode for non-interactive builds, which
             # implicitly disables coloured output and thus makes parsing a
             # lot easier.
@@ -254,6 +274,10 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
             check=True,
             capture_output=True,
             encoding="utf-8",
+            env=dict(os.environ) | {
+                'PATH': '/app/bin:/usr/bin:/usr/lib/sdk/openjdk25/bin',
+                'JAVA_HOME': '/usr/lib/sdk/openjdk25/jvm/openjdk-25'
+            }
         )
         sources = [
             create_flatpak_source(repo_directory, url)
@@ -284,7 +308,7 @@ def run_in_flatpak(manifest: Path) -> None:
     sdks = [
         base_sdk,
         FlatpakSdk(
-            name="org.freedesktop.Sdk.Extension.openjdk",
+            name="org.freedesktop.Sdk.Extension.openjdk25",
             version=base_sdk.version,
         ),
     ]
