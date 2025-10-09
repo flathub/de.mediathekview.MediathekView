@@ -57,7 +57,8 @@ modules:
         PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk25/bin
         JAVA_HOME: /usr/lib/sdk/openjdk25/jvm/openjdk-25
     build-commands:
-      - mvn -Dmaven.repo.local=.m2/repository/ -Dmaven.test.skip=true clean package
+      # Compile with maven; we disable the kotlin compiler daemon as we only compile this once.
+      - mvn -Dmaven.repo.local=.m2/repository/ -Dmaven.test.skip=true -Dkotlin.compiler.daemon=false clean package
       # Install the main MediathekView jar file and its dependencies
       - install -Dm644 -t "${FLATPAK_DEST}/share/de.mediathekview.MediathekView" target/MediathekView.jar
       - install -Dm644 -t "${FLATPAK_DEST}/share/de.mediathekview.MediathekView/dependency"
