@@ -240,7 +240,8 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
 
         cmd_checkout = [
             "git",
-            "checkout",
+            "switch",
+            "--detach",
             source.commit,
         ]
         print("Running {}".format(shlex.join(cmd_checkout)))
