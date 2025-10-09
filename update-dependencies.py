@@ -233,7 +233,7 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
             "fetch",
             "--depth=1",
             "origin",
-            f"{source.commit}",
+            source.commit,
         ]
         print("Running {}".format(shlex.join(cmd_fetch)))
         _ = run(cmd_fetch, cwd=str(source_directory), check=True)
@@ -241,7 +241,7 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
         cmd_checkout = [
             "git",
             "checkout",
-            f"{source.commit}",
+            source.commit,
         ]
         print("Running {}".format(shlex.join(cmd_checkout)))
         _ = run(cmd_checkout, cwd=str(source_directory), check=True)
