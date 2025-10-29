@@ -79,7 +79,7 @@ modules:
       - type: git
         url: https://github.com/mediathekview/MediathekView.git
         tag: 14.4.0
-        commit: 442e63ac95f2fa9bdd39f4a3ea04662ba86c02da
+        commit: 94b88daf292a68a650aa22788a6d7f3ffa69b661
         x-checker-data:
           type: git
           tag-pattern: ^[\d.]+$
