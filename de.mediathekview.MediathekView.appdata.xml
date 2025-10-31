@@ -7,7 +7,9 @@
     <summary xml:lang="de">Zugriff auf Mediatheken</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0</project_license>
-    <developer_name>MediathekView developers</developer_name>
+    <developer id="de.mediathekview">
+        <name>MediathekView developers</name>
+    </developer>
     <url type="homepage">https://mediathekview.de/</url>
     <url type="help">https://mediathekview.de/anleitung/</url>
     <url type="vcs-browser">https://github.com/mediathekview/MediathekView</url>
@@ -18,6 +20,10 @@
         <category>Player</category>
         <category>Recorder</category>
     </categories>
+    <branding>
+        <color type="primary" scheme_preference="light">#deddda</color>
+        <color type="primary" scheme_preference="dark">#5e5c64</color>
+    </branding>
     <description>
         <p>
             MediathekView searches the online media libraries of German public broadcasting stations
