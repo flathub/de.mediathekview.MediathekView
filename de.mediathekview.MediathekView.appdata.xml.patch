@@ -1,0 +1,50 @@
+diff --git a/res/de.mediathekview.mediathekview.appdata.xml b/res/de.mediathekview.mediathekview.appdata.xml
+index fe8e4e097..3fc0bf795 100644
+--- a/res/de.mediathekview.mediathekview.appdata.xml
++++ b/res/de.mediathekview.mediathekview.appdata.xml
+@@ -1,11 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <component type="desktop-application">
+-    <id>de.mediathekview.mediathekview</id>
++    <id>de.mediathekview.MediathekView</id>
+     <launchable type="desktop-id">de.mediathekview.MediathekView.desktop</launchable>
+-    <icon type="scalable">mediathekview</icon>
+-    <provides>
+-		<id>de.mediathekview.MediathekView.desktop</id>
+-	</provides>
+     <name>MediathekView</name>
+     <summary>Access public German TV Mediatheken</summary>
+     <summary xml:lang="de">Zugriff auf Mediatheken</summary>
+@@ -24,6 +20,10 @@
+         <category>Player</category>
+         <category>Recorder</category>
+     </categories>
++    <branding>
++        <color type="primary" scheme_preference="light">#deddda</color>
++        <color type="primary" scheme_preference="dark">#5e5c64</color>
++    </branding>
+     <description>
+         <p>
+             MediathekView searches the online media libraries of German public broadcasting stations
+@@ -43,10 +43,10 @@
+             automatisch herunterladen.
+         </p>
+         <p>
+-            Viewing videos requires the "VLC".
++            Viewing videos requires the "org.videolan.VLC" flatpak.
+         </p>
+         <p xml:lang="de">
+-            Zum Anschauen von Videos muss "VLC" installiert sein.
++            Zum Anschauen von Videos muss "org.videolan.VLC" installiert sein.
+         </p>
+     </description>
+     <screenshots>
+@@ -67,7 +67,7 @@
+             <caption xml:lang="de">Die Download-Ansicht</caption>
+         </screenshot>
+     </screenshots>
+-    <update_contact>info@mediathekview.de</update_contact>
++    <update_contact>sebastian@swsnr.de</update_contact>
+     <releases>
+         <release version="14.4.1" date="2025-10-31">
+             <url>https://mediathekview.de/changelog/14-4-1/</url>

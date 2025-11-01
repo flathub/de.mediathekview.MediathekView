@@ -72,7 +72,7 @@ modules:
       # Metadata and desktop integration
       - install -Dm755 de.mediathekview.MediathekView.sh "${FLATPAK_DEST}/bin/de.mediathekview.MediathekView"
       - install -Dm644 -t "${FLATPAK_DEST}/share/applications/" de.mediathekview.MediathekView.desktop
-      - install -Dm644 de.mediathekview.MediathekView.appdata.xml "${FLATPAK_DEST}/share/metainfo/de.mediathekview.MediathekView.metainfo.xml"
+      - install -Dm644 res/de.mediathekview.mediathekview.appdata.xml "${FLATPAK_DEST}/share/metainfo/de.mediathekview.MediathekView.metainfo.xml"
       # VLC launcher script
       - install -Dm755 "open-vlc.sh" "${FLATPAK_DEST}/bin/vlc"
     sources:
@@ -84,11 +84,13 @@ modules:
           type: git
           tag-pattern: ^[\d.]+$
       - maven-dependencies.json
+      # Upstream metadata targets an AppImage, so we need to adapt it a bit to
+      # fit flatpak.
+      - type: patch
+        path: de.mediathekview.MediathekView.appdata.xml.patch
       # Set default VLC path to the launcher script we install in the next step
       - type: patch
         path: default-vlc-path.patch
-      - type: file
-        path: de.mediathekview.MediathekView.appdata.xml
       - type: file
         path: de.mediathekview.MediathekView.desktop
       - type: file
