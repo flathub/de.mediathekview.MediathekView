@@ -32,7 +32,7 @@ modules:
     buildsystem: simple
     build-commands: [/usr/lib/sdk/openjdk/install.sh]
   # Libnotify for desktop notifications; we build it separately to avoid depending
-  # on the entire Gnome runtime.
+  # on the entire Freedesktop runtime.
   - name: libnotify
     buildsystem: meson
     config-opts:
