@@ -41,7 +41,9 @@ modules:
         JAVA_HOME: /usr/lib/sdk/openjdk/jvm/openjdk-24
     build-commands:
       # Compile with maven; we disable the kotlin compiler daemon as we only compile this once.
-      - mvn -Dmaven.repo.local=.m2/repository/ -Dmaven.test.skip=true -Dkotlin.compiler.daemon=false
+      - mvn -Dmaven.repo.local=.m2/repository/
+        -Dmaven.test.skip=true -Dkotlin.compiler.daemon=false
+        -Dproject.build.outputTimestamp="${SOURCE_DATE_EPOCH}"
         clean package
       # Install the main MediathekView jar file and its dependencies
       - install -Dm644 -t "${FLATPAK_DEST}/share/de.mediathekview.MediathekView" target/MediathekView.jar
