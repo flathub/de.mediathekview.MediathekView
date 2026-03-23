@@ -38,7 +38,7 @@ modules:
     build-options:
       env:
         PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk25/bin
-        JAVA_HOME: /usr/lib/sdk/openjdk/jvm/openjdk-25
+        JAVA_HOME: /usr/lib/sdk/openjdk25/jvm/openjdk-25
     build-commands:
       # Compile with maven; we disable the kotlin compiler daemon as we only compile this once.
       - mvn -Dmaven.repo.local=.m2/repository/
