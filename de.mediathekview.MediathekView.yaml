@@ -3,7 +3,7 @@ runtime: org.freedesktop.Platform
 runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.openjdk
+  - org.freedesktop.Sdk.Extension.openjdk25
 command: de.mediathekview.MediathekView
 finish-args:
   - --share=network # We need the network to download films
@@ -30,15 +30,15 @@ modules:
   # See https://github.com/flathub/org.freedesktop.Sdk.Extension.openjdk#usage
   - name: openjdk
     buildsystem: simple
-    build-commands: [/usr/lib/sdk/openjdk/install.sh]
+    build-commands: [/usr/lib/sdk/openjdk25/install.sh]
 
   # Mediathekview itself
   - name: mediathekview
     buildsystem: simple
     build-options:
       env:
-        PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk/bin
-        JAVA_HOME: /usr/lib/sdk/openjdk/jvm/openjdk-24
+        PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk25/bin
+        JAVA_HOME: /usr/lib/sdk/openjdk25/jvm/openjdk-25
     build-commands:
       # Compile with maven; we disable the kotlin compiler daemon as we only compile this once.
       - mvn -Dmaven.repo.local=.m2/repository/
@@ -64,8 +64,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/mediathekview/MediathekView.git
-        tag: 14.4.2
-        commit: 86395a89f189ff97c37b8ee34657ed9dd0cc7f2f
+        tag: 14.5.0
+        commit: 4620b0765fe246d0386be954513d9d5206bfa270
         x-checker-data:
           type: git
           tag-pattern: ^[\d.]+$

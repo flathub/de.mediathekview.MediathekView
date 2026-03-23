@@ -252,7 +252,7 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
         cmd = [
             str(source_directory / "mvnw"),
             # Disable kotlin daemon as this is a single fire-and-forget compilation
-            '-Dkotlin.compiler.daemon=false'
+            "-Dkotlin.compiler.daemon=false",
             # Enable batch mode for non-interactive builds, which
             # implicitly disables coloured output and thus makes parsing a
             # lot easier.
