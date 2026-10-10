@@ -28,13 +28,13 @@ import os
 import re
 import shlex
 import sys
+from argparse import ArgumentParser
 from collections.abc import Iterator
-from pathlib import Path, PosixPath
 from dataclasses import dataclass
+from pathlib import Path, PosixPath
 from subprocess import CalledProcessError, run
 from tempfile import TemporaryDirectory
 from typing import Any, override
-from argparse import ArgumentParser
 
 
 @dataclass(kw_only=True, frozen=True)
@@ -119,8 +119,7 @@ class ArtifactUrl:
                 return ArtifactUrl(
                     url=url, repo_base_url=base, relpath=url[len(base) :]
                 )
-        else:
-            raise ValueError(f"{url} is not from a known Maven repository")
+        raise ValueError(f"{url} is not from a known Maven repository")
 
 
 def find_mediathekview_source(manifest: Path) -> FlatpakGitSource:
@@ -225,7 +224,7 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
             source.url,
             str(source_directory),
         ]
-        print("Running {}".format(shlex.join(cmd)))
+        print(f"Running {shlex.join(cmd)}")
         _ = run(cmd, check=True)
 
         cmd_fetch = [
@@ -235,7 +234,7 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
             "origin",
             source.commit,
         ]
-        print("Running {}".format(shlex.join(cmd_fetch)))
+        print(f"Running {shlex.join(cmd_fetch)}")
         _ = run(cmd_fetch, cwd=str(source_directory), check=True)
 
         cmd_checkout = [
@@ -244,7 +243,7 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
             "--detach",
             source.commit,
         ]
-        print("Running {}".format(shlex.join(cmd_checkout)))
+        print(f"Running {shlex.join(cmd_checkout)}")
         _ = run(cmd_checkout, cwd=str(source_directory), check=True)
 
         repo_directory = working_directory / "repo"
@@ -267,7 +266,7 @@ def update_dependencies(source: FlatpakGitSource) -> list[FlatpakFileSource]:
             # make sure we get everything that this goal requires
             "package",
         ]
-        print("Running {}".format(shlex.join(cmd)))
+        print(f"Running {shlex.join(cmd)}")
         mvnw = run(
             cmd,
             cwd=source_directory,
@@ -320,7 +319,7 @@ def run_in_flatpak(manifest: Path) -> None:
         "--assumeyes",
     ]
     cmd.extend(str(s) for s in sdks)
-    print("Running {}".format(shlex.join(cmd)))
+    print(f"Running {shlex.join(cmd)}")
     _ = run(cmd, check=True)
 
     manifest_directory = manifest.parent.absolute()
@@ -329,15 +328,13 @@ def run_in_flatpak(manifest: Path) -> None:
         "run",
         "--share=network",
         "--command=/bin/bash",
-        "--filesystem={}".format(manifest_directory.as_posix()),
-        "--cwd={}".format(manifest_directory.as_posix()),
+        f"--filesystem={manifest_directory.as_posix()}",
+        f"--cwd={manifest_directory.as_posix()}",
         str(base_sdk),
         "-c",
-        "source /usr/lib/sdk/openjdk25/enable.sh; {}/update-dependencies.py".format(
-            shlex.quote(manifest_directory.as_posix())
-        ),
+        f"source /usr/lib/sdk/openjdk25/enable.sh; {shlex.quote(manifest_directory.as_posix())}/update-dependencies.py",
     ]
-    print("Running {}".format(shlex.join(cmd)))
+    print(f"Running {shlex.join(cmd)}")
     _ = run(cmd, check=True)
 
 
