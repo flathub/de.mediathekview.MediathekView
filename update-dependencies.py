@@ -189,16 +189,14 @@ def create_flatpak_source(repo: Path, url: ArtifactUrl) -> FlatpakFileSource:
         FlatpakFileSource: A flatpak file source for the artifact
     """
     artifact = repo / url.relpath
-    dest_filename = artifact.name
-    # artifact = PosixPath(".m2") / "repository" / url.relpath
-    if dest_filename == "maven-metadata.xml":
+    if artifact.name == "maven-metadata.xml":
         candidates = glob.glob("maven-metadata-*.xml", root_dir=artifact.parent)
         if candidates:
-            dest_filename = candidates[0]
+            artifact = artifact.parent / candidates[0]
     return FlatpakFileSource(
         url=url.url,
         dest=(PosixPath(".m2") / "repository" / url.relpath).parent.as_posix(),
-        dest_filename=dest_filename,
+        dest_filename=artifact.name,
         sha512=hashlib.sha512(artifact.read_bytes()).hexdigest(),
     )
 
