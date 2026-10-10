@@ -333,7 +333,7 @@ def run_in_flatpak(manifest: Path) -> None:
         "--cwd={}".format(manifest_directory.as_posix()),
         str(base_sdk),
         "-c",
-        "source /usr/lib/sdk/openjdk/enable.sh; {}/update-dependencies.py".format(
+        "source /usr/lib/sdk/openjdk25/enable.sh; {}/update-dependencies.py".format(
             shlex.quote(manifest_directory.as_posix())
         ),
     ]
