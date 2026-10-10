@@ -1,5 +1,5 @@
 diff --git a/res/de.mediathekview.mediathekview.appdata.xml b/res/de.mediathekview.mediathekview.appdata.xml
-index 35386414a..8c8d55ff5 100644
+index b9f59b128..0cd4be479 100644
 --- a/res/de.mediathekview.mediathekview.appdata.xml
 +++ b/res/de.mediathekview.mediathekview.appdata.xml
 @@ -1,11 +1,7 @@
@@ -28,12 +28,16 @@ index 35386414a..8c8d55ff5 100644
          </p>
      </description>
      <screenshots>
-@@ -71,7 +67,7 @@
+@@ -71,8 +67,11 @@
              <caption xml:lang="de">Die Download-Ansicht</caption>
          </screenshot>
      </screenshots>
 -    <update_contact>info@mediathekview.de</update_contact>
 +    <update_contact>sebastian@swsnr.de</update_contact>
      <releases>
-         <release version="14.4.2" date="2025-11-03">
-             <url>https://mediathekview.de/changelog/14-4-1/</url>
++        <release version="15.0.0" date="2026-10-09">
++            <url>https://mediathekview.de/changelog/15-0-0/</url>
++        </release>
+         <release version="14.5.0" date="2026-03-20">
+             <url>https://mediathekview.de/changelog/14-5-0/</url>
+         </release>

@@ -64,8 +64,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/mediathekview/MediathekView.git
-        tag: 14.5.0
-        commit: 4620b0765fe246d0386be954513d9d5206bfa270
+        tag: 15.0.0
+        commit: 55f8f7dfda8adaeb8f6d4112dac4b38e0d149639
         x-checker-data:
           type: git
           tag-pattern: ^[\d.]+$
@@ -74,9 +74,6 @@ modules:
       # fit flatpak.
       - type: patch
         path: de.mediathekview.MediathekView.appdata.xml.patch
-      # Set default VLC path to the launcher script we install in the next step
-      - type: patch
-        path: default-vlc-path.patch
       - type: file
         path: de.mediathekview.MediathekView.desktop
       - type: file
