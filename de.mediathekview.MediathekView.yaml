@@ -68,7 +68,7 @@ modules:
         commit: 55f8f7dfda8adaeb8f6d4112dac4b38e0d149639
         x-checker-data:
           type: git
-          tag-pattern: ^[\d.]+$
+          tag-pattern: '^([\d.]+)$'
       - maven-dependencies.json
       # Upstream metadata targets an AppImage, so we need to adapt it a bit to
       # fit flatpak.
